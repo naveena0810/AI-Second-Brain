@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+@layer base {
+  :root {
+    /* LIGHT MODE (Warm Premium) */
+    --bg-primary: #FDFDF7;
+    --bg-secondary: #F5F4EB;
+    --surface: #FFFFFF;
+    --accent-primary: #7C9082;
+    --accent-secondary: #CAA77D;
+    --accent-highlight: #9BB8A7;
+    --accent-tertiary: #B87352;
+    --text-primary: #1F1F1F;
+    --text-secondary: #6B6B6B;
+    --border: #E5E0D8;
+    --shadow: rgba(0, 0, 0, 0.06);
+  }
+
+  .dark {
+    /* DARK MODE (Luxury Dark) */
+    --bg-primary: #0F1110;
+    --bg-secondary: #161816;
+    --surface: #1E211E;
+    --accent-primary: #A8C3B0;
+    --accent-secondary: #D6B48A;
+    --accent-highlight: #6FAE95;
+    --accent-tertiary: #C98B6A;
+    --text-primary: #E8E8E8;
+    --text-secondary: #A0A0A0;
+    --border: #2A2D2A;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+
+  body {
+    @apply bg-[var(--bg-primary)] text-[var(--text-primary)] antialiased min-h-screen selection:bg-[var(--accent-secondary)] selection:text-[var(--bg-primary)] transition-colors duration-300;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply backdrop-blur-[12px] border border-[var(--border)] rounded-3xl p-6;
+  }
+  
+  :root .glass-panel {
+    background: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+  }
+  
+  .dark .glass-panel {
+    background: rgba(30, 33, 30, 0.65);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+
+  .premium-card {
+    @apply rounded-2xl p-5 border shadow-[0_2px_12px_var(--shadow)] bg-[var(--surface)] transition-all duration-300 border-[var(--border)] hover:shadow-[0_6px_24px_var(--shadow)] hover:-translate-y-px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+  }
+}
+
+/* Hide unwanted development overlays */
+[id^="headlessui-portal-root"],
+#instant-inspect-button,
+.nvidia-nim-overlay,
+.nvai-widget,
+[class*="instant-inspect"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+

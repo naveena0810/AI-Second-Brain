@@ -34,7 +34,7 @@ export default function MergeSelector({ documents, notes, selected, onToggle }: 
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar pb-4">
+    <div className="merge-selector-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar pb-4">
       {allItems.map(item => {
         const isSelected = selected.includes(item.id);
         return (

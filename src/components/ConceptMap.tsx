@@ -4,7 +4,7 @@ import { useState, useCallback } from "react";
 import { db } from "@/lib/instant";
 import { id } from "@instantdb/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Workflow, Sparkles, FileText, StickyNote, Download, Database } from "lucide-react";
+import { Workflow, Sparkles, FileText, StickyNote, Download, Database, ChevronDown, ChevronUp } from "lucide-react";
 import GraphCanvas from "./GraphCanvas";
 import EmptyState from "./EmptyState";
 import { toPng } from 'html-to-image';
@@ -17,6 +17,7 @@ export default function ConceptMap({ userId }: Props) {
   const [selectedSource, setSelectedSource] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState("");
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   const { data, isLoading } = db.useQuery({
     notes: { $: { where: { userId } } },
@@ -190,13 +191,36 @@ export default function ConceptMap({ userId }: Props) {
   };
 
   return (
-    <div className="flex h-full w-full">
+    <div className="flex h-full w-full relative">
+      {/* Mobile overlay backdrop */}
+      {mobileSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-30 md:hidden"
+          onClick={() => setMobileSidebarOpen(false)}
+        />
+      )}
+
+      {/* Mobile sidebar toggle button */}
+      <button
+        className="md:hidden absolute bottom-[calc(64px+16px)] left-1/2 -translate-x-1/2 z-[45] flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-bold shadow-xl transition-all"
+        style={{ background: "var(--accent-primary)", color: "white", minHeight: 44 }}
+        onClick={() => setMobileSidebarOpen(v => !v)}
+      >
+        {mobileSidebarOpen ? "Hide" : "Select Source"}
+        {mobileSidebarOpen
+          ? <span style={{ fontSize: 16 }}>▼</span>
+          : <span style={{ fontSize: 16 }}>▲</span>
+        }
+      </button>
+
       {/* Sidebar for selecting sources */}
-      <div 
-        className="w-[300px] flex-shrink-0 flex flex-col h-full overflow-hidden border-r"
+      <div
+        className={`conceptmap-sidebar w-[300px] flex-shrink-0 flex flex-col h-full overflow-hidden border-r ${
+          mobileSidebarOpen ? "" : "max-md:hidden"
+        }`}
         style={{ borderColor: 'var(--border)', background: 'var(--bg-secondary)' }}
       >
-        <div className="w-[300px] p-4 flex flex-col h-full">
+        <div className="sidebar-inner w-[300px] p-4 flex flex-col h-full">
           <div className="mb-6">
             <h2 className="text-xl font-bold" style={{ color: "var(--text-primary)" }}>Visual Graph</h2>
             <p className="text-xs mt-1" style={{ color: "var(--text-secondary)" }}>Select an item to generate its map</p>
@@ -224,7 +248,7 @@ export default function ConceptMap({ userId }: Props) {
         </div>
       </div>
       {/* Main Canvas Area */}
-      <div className="flex-1 flex flex-col relative overflow-hidden" style={{ background: "var(--bg-primary)" }}>
+      <div className="conceptmap-canvas-area flex-1 flex flex-col relative overflow-hidden" style={{ background: "var(--bg-primary)" }}>
         {!selectedSource ? (
           <EmptyState
             icon={Workflow}

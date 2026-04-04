@@ -101,16 +101,16 @@ export default function QuizMode({ userId }: Props) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-10 min-h-full">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10 min-h-full">
       {/* Quiz Header */}
-      <div className="mb-10 flex items-center justify-between">
+      <div className="mb-6 sm:mb-10 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ background: "var(--accent-secondary)", color: "white" }}>
-            <Brain size={24} />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center" style={{ background: "var(--accent-secondary)", color: "white" }}>
+            <Brain size={22} />
           </div>
           <div>
-            <h1 className="text-2xl font-black tracking-tight" style={{ color: "var(--text-primary)" }}>Revision Quiz</h1>
-            <p className="text-sm font-bold uppercase tracking-widest" style={{ color: "var(--text-secondary)" }}>Active Exam Preparation</p>
+            <h1 className="text-xl sm:text-2xl font-black tracking-tight" style={{ color: "var(--text-primary)" }}>Revision Quiz</h1>
+            <p className="text-xs sm:text-sm font-bold uppercase tracking-widest" style={{ color: "var(--text-secondary)" }}>Active Exam Preparation</p>
           </div>
         </div>
         {state === "active" && (
@@ -134,17 +134,17 @@ export default function QuizMode({ userId }: Props) {
               <p className="text-sm leading-relaxed mb-6 opacity-90">
                 Select your notes or documents below, and our AI will generate a personalized quiz to help you identify knowledge gaps.
               </p>
-              <div className="flex items-center gap-6">
+              <div className="quiz-steps-row flex items-center gap-6">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-xs font-black">1</div>
                   <span className="text-xs font-bold uppercase tracking-wider">Select Sources</span>
                 </div>
-                <div className="w-4 h-[1px] bg-white/20" />
+                <div className="quiz-step-divider w-4 h-[1px] bg-white/20" />
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-xs font-black">2</div>
                   <span className="text-xs font-bold uppercase tracking-wider">Configure</span>
                 </div>
-                <div className="w-4 h-[1px] bg-white/20" />
+                <div className="quiz-step-divider w-4 h-[1px] bg-white/20" />
                 <div className="flex items-center gap-2 text-white/50">
                   <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-xs font-black">3</div>
                   <span className="text-xs font-bold uppercase tracking-wider">Test Yourself</span>

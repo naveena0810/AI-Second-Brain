@@ -78,7 +78,7 @@ export default function Timeline({ userId }: Props) {
 
       {/* Stats row */}
       {allEvents.length > 0 && (
-        <div className="grid grid-cols-3 gap-3">
+        <div className="timeline-stats-grid grid grid-cols-3 gap-3">
           {[
             { icon: FileText, label: "Documents", count: insights.documents, color: "var(--accent-primary)" },
             { icon: StickyNote, label: "Notes", count: insights.notes, color: "var(--accent-secondary)" },
@@ -149,14 +149,14 @@ export default function Timeline({ userId }: Props) {
       ) : (
         <div className="relative mt-8">
           {/* Vertical guide line */}
-          <div className="absolute left-[30px] top-0 bottom-0 w-0.5 rounded-full" style={{ background: "var(--accent-secondary)", opacity: 0.3 }} />
+          <div className="timeline-guide-line absolute left-[30px] top-0 bottom-0 w-0.5 rounded-full" style={{ background: "var(--accent-secondary)", opacity: 0.3 }} />
 
           <div className="space-y-12">
             <AnimatePresence>
               {groups.map(({ label, monthKey, events }) => (
                 <motion.div key={monthKey} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
                   <TimelineSummary label={label} events={events} />
-                  <div className="space-y-6 mt-6 pl-14">
+                  <div className="timeline-items-pl space-y-6 mt-6 pl-14">
                     {events.map((event, index) => (
                       <TimelineItem key={event.id} event={event} index={index} />
                     ))}

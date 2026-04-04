@@ -160,12 +160,12 @@ export default function AuthPage() {
   );
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: "var(--bg-primary)" }}>
+    <div className="min-h-screen flex items-center justify-center px-4 py-8" style={{ background: "var(--bg-primary)" }}>
       <div className="fixed inset-0 pointer-events-none" style={{
         backgroundImage: "radial-gradient(circle at 20% 20%, rgba(124,144,130,0.09) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(202,167,125,0.09) 0%, transparent 50%)"
       }} />
 
-      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }} className="w-full max-w-md relative z-10">
+      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }} className="auth-card-width w-full max-w-md relative z-10">
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl mb-4" style={{ background: "var(--accent-primary)" }}>

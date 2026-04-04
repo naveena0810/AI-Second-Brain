@@ -128,7 +128,7 @@ export default function DocumentUploader({ userId }: Props) {
         onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
         onDragLeave={() => setIsDragging(false)}
         onDrop={handleDrop}
-        className="relative border border-dashed rounded-[32px] p-16 text-center cursor-pointer transition-all duration-300 shadow-sm hover:shadow-[0_4px_20px_var(--shadow)]"
+        className="upload-zone relative border border-dashed rounded-[32px] p-16 text-center cursor-pointer transition-all duration-300 shadow-sm hover:shadow-[0_4px_20px_var(--shadow)]"
         style={{
           borderColor: isDragging ? "var(--accent-primary)" : "var(--border)",
           background: "var(--surface)",

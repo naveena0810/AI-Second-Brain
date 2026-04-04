@@ -59,7 +59,7 @@ export default function QuizSetup({
             <p className="text-xs font-semibold">No documents or notes found to generate a quiz from.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar pb-2">
+          <div className="quiz-source-grid grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar pb-2">
             {allItems.map(item => {
               const isSelected = selected.includes(item.id);
               return (
@@ -73,7 +73,8 @@ export default function QuizSetup({
                   }`}
                   style={{
                     background: isSelected ? "var(--surface)" : "var(--bg-secondary)",
-                    borderColor: isSelected ? "var(--accent-primary)" : "var(--border)"
+                    borderColor: isSelected ? "var(--accent-primary)" : "var(--border)",
+                    minHeight: 52,
                   }}
                 >
                   <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 transition-all ${

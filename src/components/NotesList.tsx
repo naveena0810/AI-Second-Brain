@@ -96,19 +96,19 @@ export default function NotesList({ userId }: Props) {
         ) : (
           <motion.div key="notes-list" className="space-y-6">
             {/* Header */}
-            <div className="flex items-center justify-between">
+            <div className="notes-header flex items-center justify-between">
                <SectionHeader 
                  title="Notes" 
                  subtitle={`${(data?.notes ?? []).length} captured ideas`} 
                />
               <div className="flex items-center gap-3">
-                <div className="w-56">
+                <div className="search-wrapper w-56">
                   <SearchBar value={search} onChange={setSearch} placeholder="Search notes…" />
                 </div>
                 <button
                   onClick={() => setShowVoiceMode(true)}
-                  className="relative flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-sm border hover:scale-105"
-                  style={{ background: "var(--surface)", color: "var(--text-primary)", borderColor: "var(--border)" }}
+                  className="voice-btn relative flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-sm border hover:scale-105"
+                  style={{ background: "var(--surface)", color: "var(--text-primary)", borderColor: "var(--border)", minHeight: 44 }}
                 >
                   <div className="w-2 h-2 rounded-full absolute -top-0.5 -right-0.5 animate-pulse" style={{ background: "var(--accent-highlight)", boxShadow: "0 0 10px var(--accent-highlight)" }} />
                   <Mic size={14} style={{ color: "var(--accent-highlight)" }} />
@@ -169,7 +169,7 @@ export default function NotesList({ userId }: Props) {
                 }
               />
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-20">
+              <div className="notes-grid grid grid-cols-1 md:grid-cols-2 gap-4 pb-20">
                 <AnimatePresence>
                   {notes.map((note) => (
                     <BaseCard key={note.id} className="group relative flex flex-col min-h-[160px]">

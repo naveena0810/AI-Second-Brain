@@ -15,7 +15,7 @@ export default function FloatingButton({ text, icon: Icon = Plus, ...props }: Pr
       whileTap={{ scale: 0.95 }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="fixed bottom-8 right-8 z-50 flex items-center gap-2 px-6 py-4 rounded-full text-white font-bold text-sm shadow-2xl transition-all"
+      className="floating-action-btn fixed bottom-8 right-6 z-50 flex items-center gap-2 px-5 py-3.5 rounded-full text-white font-bold text-sm shadow-2xl transition-all"
       style={{
         background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
       }}

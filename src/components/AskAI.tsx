@@ -369,12 +369,11 @@ export default function AskAI({ userId }: Props) {
       </AnimatePresence>
 
       {/* Header */}
-      {/* ... (keep header as is) */}
-      <div className="flex items-center gap-3 px-6 h-16 border-b flex-shrink-0" style={{ borderColor: "var(--border)", background: "var(--bg-secondary)" }}>
+      <div className="flex items-center gap-3 px-4 sm:px-6 h-14 sm:h-16 border-b flex-shrink-0" style={{ borderColor: "var(--border)", background: "var(--bg-secondary)" }}>
         <button 
           onClick={() => setSidebarOpen(!sidebarOpen)}
           className="p-2 rounded-xl border transition-colors hover:bg-black/5 flex-shrink-0"
-          style={{ borderColor: "var(--border)", background: "var(--bg-primary)", color: "var(--text-primary)" }}
+          style={{ borderColor: "var(--border)", background: "var(--bg-primary)", color: "var(--text-primary)", minWidth: 44, minHeight: 44 }}
         >
           {sidebarOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
@@ -407,7 +406,7 @@ export default function AskAI({ userId }: Props) {
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: 300, opacity: 1 }}
               exit={{ width: 0, opacity: 0 }}
-              className="flex-shrink-0 flex flex-col h-full overflow-hidden border-r"
+              className="askai-sidebar flex-shrink-0 flex flex-col h-full overflow-hidden border-r"
               style={{ borderColor: "var(--border)", background: "var(--bg-secondary)" }}
             >
               <div className="w-[300px] p-4 flex flex-col h-full">
@@ -515,8 +514,16 @@ export default function AskAI({ userId }: Props) {
         </AnimatePresence>
 
         {/* Chat area */}
+        {/* Mobile overlay: tap outside sidebar to close */}
+        {sidebarOpen && (
+          <div
+            className="askai-overlay hidden fixed inset-0 bg-black/40 z-40"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
+
         <div className="flex-1 flex flex-col h-full overflow-hidden relative" style={{ background: "var(--bg-primary)" }}>
-          <div className="flex-1 overflow-y-auto space-y-6 px-6 py-8 custom-scrollbar">
+          <div className="askai-messages flex-1 overflow-y-auto space-y-6 px-4 sm:px-6 py-6 sm:py-8 custom-scrollbar">
             {messages.length === 0 ? (
               <EmptyState icon={BrainCircuit} title="Ask your knowledge base" description="Type a question below. The AI will pull relevant notes and documents to guide its response." />
             ) : (
@@ -528,7 +535,7 @@ export default function AskAI({ userId }: Props) {
                     animate={{ opacity: 1, y: 0 }}
                     className="flex flex-col mb-8"
                   >
-                    <div className="flex gap-5 max-w-4xl mx-auto w-full">
+                    <div className="askai-message-inner flex gap-3 sm:gap-5 max-w-4xl mx-auto w-full">
                       {/* Avatar */}
                       <div className="flex-shrink-0 mt-1">
                         {msg.role === "user" ? (
@@ -701,7 +708,7 @@ export default function AskAI({ userId }: Props) {
           {error && <p className="text-sm text-red-500 mt-2 px-1">{error}</p>}
 
           {/* Input container - floating style or fixed at bottom */}
-          <div className="p-6 pt-0">
+          <div className="askai-input-wrap p-4 sm:p-6 pt-0">
             {isExplainMode ? (
               <div className="max-w-4xl mx-auto pt-2">
                 <div className="flex justify-end mb-2">
@@ -726,8 +733,8 @@ export default function AskAI({ userId }: Props) {
                     className="flex-1 px-4 py-2 text-base bg-transparent outline-none w-full font-medium"
                     style={{ color: "var(--text-primary)" }}
                   />
-                  <div className="flex items-center justify-between pl-4">
-                    <div className="flex items-center gap-3">
+                  <div className="askai-input-toolbar flex items-center justify-between pl-2 sm:pl-4">
+                    <div className="askai-toolbar-left flex items-center gap-2 sm:gap-3">
                        <PerspectiveSelector value={perspective} onChange={setPerspective} />
                        {perspective !== "standard" && (
                          <span className="text-[11px] font-semibold italic" style={{ color: "var(--text-secondary)" }}>
@@ -736,7 +743,7 @@ export default function AskAI({ userId }: Props) {
                        )}
                     </div>
                     
-                    <div className="flex items-center gap-2">
+                    <div className="askai-toolbar-right flex items-center gap-2">
                       <button
                         onClick={() => setIsExplainMode(true)}
                         className="text-xs font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 px-4 py-2 rounded-xl transition-all flex items-center gap-1.5"

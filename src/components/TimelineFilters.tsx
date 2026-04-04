@@ -28,9 +28,9 @@ export default function TimelineFilters({ filter, setFilter, search, setSearch, 
   };
 
   return (
-    <div className="flex flex-col sm:flex-row gap-3">
+    <div className="timeline-filters-row flex flex-col sm:flex-row gap-3">
       {/* Filter buttons */}
-      <div className="flex gap-1.5 flex-wrap">
+      <div className="timeline-filter-buttons flex gap-1.5 flex-wrap">
         {FILTERS.map(({ key, label, emoji }) => (
           <button
             key={key}
@@ -54,7 +54,7 @@ export default function TimelineFilters({ filter, setFilter, search, setSearch, 
       </div>
 
       {/* Search */}
-      <div className="flex-1 relative max-w-xs">
+      <div className="timeline-search flex-1 relative max-w-xs">
         <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: "var(--text-secondary)" }} />
         <input
           type="text"

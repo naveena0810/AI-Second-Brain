@@ -86,3 +86,312 @@
   pointer-events: none !important;
 }
 
+/* ============================
+   MOBILE RESPONSIVE UTILITIES
+   ============================ */
+
+/* Prevent horizontal overflow globally */
+* {
+  box-sizing: border-box;
+}
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Bottom tab bar (mobile only) */
+.mobile-bottom-tab-bar {
+  display: none;
+}
+
+/* Hamburger menu overlay */
+.mobile-nav-overlay {
+  display: none;
+}
+
+/* ============================
+   BREAKPOINTS:
+   mobile  < 768px
+   tablet  768px – 1024px
+   desktop > 1024px
+   ============================ */
+
+@media (max-width: 767px) {
+
+  /* Bottom tab bar visible on mobile */
+  .mobile-bottom-tab-bar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 60;
+    align-items: stretch;
+    border-top: 1px solid var(--border);
+    background: var(--bg-primary);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Show mobile nav overlay */
+  .mobile-nav-overlay {
+    display: block;
+  }
+
+  /* Header: hide desktop tab nav on mobile */
+  .desktop-tab-nav {
+    display: none !important;
+  }
+
+  /* Show hamburger icon on mobile */
+  .mobile-hamburger {
+    display: flex !important;
+  }
+
+  /* Mobile slide-in menu */
+  .mobile-menu-panel {
+    display: flex;
+  }
+
+  /* Add bottom padding to main content so it clears the bottom tab bar */
+  .main-content-area {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* Document / note cards: single column */
+  .docs-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Document list header: stack on mobile */
+  .doclist-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+  }
+  .doclist-header .search-wrapper {
+    width: 100% !important;
+  }
+
+  /* Upload zone: full-width, smaller padding */
+  .upload-zone {
+    border-radius: 20px !important;
+    padding: 2.5rem 1.5rem !important;
+  }
+
+  /* Notes header: stack on mobile */
+  .notes-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+  }
+  .notes-header .search-wrapper {
+    width: 100% !important;
+  }
+  .notes-header .voice-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 44px;
+  }
+
+  /* Note cards: single column */
+  .notes-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Floating action button: ensure 44px target and clear bottom tab bar */
+  .floating-action-btn {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    bottom: calc(64px + 12px) !important;
+    right: 1.25rem !important;
+  }
+
+  /* Timeline stat cards: single column */
+  .timeline-stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Timeline vertical guide offset */
+  .timeline-guide-line {
+    left: 16px !important;
+  }
+  .timeline-items-pl {
+    padding-left: 2.5rem !important;
+  }
+
+  /* Timeline filters: horizontally scrollable */
+  .timeline-filters-row {
+    flex-direction: column !important;
+  }
+  .timeline-filter-buttons {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.5rem !important;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .timeline-filter-buttons::-webkit-scrollbar {
+    display: none;
+  }
+  .timeline-filter-buttons button {
+    flex-shrink: 0;
+    min-height: 44px;
+  }
+  .timeline-search {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* AskAI: sidebar becomes full-screen drawer */
+  .askai-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    z-index: 50 !important;
+    width: 85vw !important;
+    max-width: 320px !important;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.3) !important;
+  }
+
+  /* AskAI overlay when sidebar open */
+  .askai-overlay {
+    display: block !important;
+  }
+
+  /* AskAI input: sticky at bottom */
+  .askai-input-wrap {
+    padding: 0.75rem !important;
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  .askai-input-toolbar  {
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+  }
+  .askai-toolbar-left {
+    flex: 1 1 100% !important;
+    order: 2 !important;
+  }
+  .askai-toolbar-right {
+    flex: 1 1 100% !important;
+    order: 1 !important;
+    display: flex !important;
+    gap: 0.5rem !important;
+  }
+  .askai-toolbar-right > button {
+    flex: 1 !important;
+    min-height: 44px !important;
+    border-radius: 12px !important;
+  }
+
+  /* AskAI message area: adjust for smaller screens */
+  .askai-messages {
+    padding: 1rem !important;
+  }
+  .askai-message-inner {
+    gap: 0.75rem !important;
+  }
+
+  /* ConceptMap: sidebar becomes bottom sheet toggle */
+  .conceptmap-sidebar {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 64px !important; /* above bottom tab bar */
+    width: 100% !important;
+    max-height: 60vh !important;
+    border-radius: 24px 24px 0 0 !important;
+    border-right: none !important;
+    border-top: 1px solid var(--border) !important;
+    overflow: hidden !important;
+    z-index: 40 !important;
+    box-shadow: 0 -8px 32px rgba(0,0,0,0.2) !important;
+  }
+  .conceptmap-sidebar .sidebar-inner {
+    width: 100% !important;
+    max-height: 60vh !important;
+    overflow-y: auto !important;
+  }
+  .conceptmap-canvas-area {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* KnowledgeMerge: single column */
+  .merge-selector-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* QuizSetup: single column source list */
+  .quiz-source-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Quiz step indicators: allow wrap + smaller text */
+  .quiz-steps-row {
+    flex-wrap: wrap !important;
+    gap: 0.75rem !important;
+  }
+  .quiz-step-divider {
+    display: none !important;
+  }
+
+  /* Increase all button tap targets */
+  button, a[role="button"] {
+    min-height: 36px;
+  }
+
+  /* Auth card: full-width with padding */
+  .auth-card-width {
+    max-width: 100% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Header on mobile: smaller, no gap between logo and actions */
+  .header-inner {
+    gap: 0.5rem !important;
+  }
+
+  /* General font scaling on mobile */
+  .text-responsive-xl {
+    font-size: 1.25rem !important;
+  }
+  .text-responsive-2xl {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* Tablet tweaks */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .docs-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .mobile-hamburger {
+    display: none !important;
+  }
+  .desktop-tab-nav {
+    display: flex !important;
+  }
+  .mobile-bottom-tab-bar {
+    display: none !important;
+  }
+}
+
+/* Desktop: hide mobile-only elements */
+@media (min-width: 1024px) {
+  .mobile-hamburger {
+    display: none !important;
+  }
+  .desktop-tab-nav {
+    display: flex !important;
+  }
+  .mobile-bottom-tab-bar {
+    display: none !important;
+  }
+  .askai-overlay {
+    display: none !important;
+  }
+}

@@ -28,9 +28,9 @@ Basic Answer: "${answer}"
 Please expand this into a Deep Dive Mode explanation.`;
 
     const models = [
-      { name: "moonshotai/kimi-k2.5", url: "https://integrate.api.nvidia.com/v1/chat/completions", stream: false },
-      { name: "meta/llama-3.1-405b-instruct", url: "https://integrate.api.nvidia.com/v1/chat/completions", stream: false },
-      { name: "nvidia/llama-3.1-nemotron-70b-instruct", url: "https://integrate.api.nvidia.com/v1/chat/completions", stream: false }
+      { id: "meta/llama-3.1-8b-instruct", baseURL: "https://integrate.api.nvidia.com/v1/chat/completions", params: {} },
+      { id: "meta/llama-3.1-405b-instruct", baseURL: "https://integrate.api.nvidia.com/v1/chat/completions", params: {} },
+      { id: "nvidia/llama-3.1-nemotron-70b-instruct", baseURL: "https://integrate.api.nvidia.com/v1/chat/completions", params: {} }
     ];
 
     let finalDeepDive = "";

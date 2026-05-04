@@ -43,7 +43,7 @@ Rules:
     const userPrompt = `Generate a ${difficulty} difficulty quiz based on this content:\n\n${content.slice(0, 4000)}`;
 
     const models = [
-      { id: "moonshot-v1-auto", baseURL: "https://api.moonshot.cn/v1/chat/completions", params: { chat_template_kwargs: { thinking: false } } },
+      { id: "meta/llama-3.1-8b-instruct", baseURL: "https://integrate.api.nvidia.com/v1/chat/completions", params: {} },
       { id: "meta/llama-3.1-405b-instruct", baseURL: "https://integrate.api.nvidia.com/v1/chat/completions", params: {} },
       { id: "nvidia/llama-3.1-nemotron-70b-instruct", baseURL: "https://integrate.api.nvidia.com/v1/chat/completions", params: {} }
     ];

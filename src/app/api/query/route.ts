@@ -164,7 +164,7 @@ Rule: Base your answer on the provided context. Keep all language consistent wit
 
     // Call AI API with Fallback mechanism
     const models = [
-      { id: "moonshot-v1-auto", baseURL: "https://api.moonshot.cn/v1/chat/completions", params: { chat_template_kwargs: { thinking: false } } },
+      { id: "meta/llama-3.1-8b-instruct", baseURL: "https://integrate.api.nvidia.com/v1/chat/completions", params: {} },
       { id: "meta/llama-3.1-405b-instruct", baseURL: "https://integrate.api.nvidia.com/v1/chat/completions", params: {} },
       { id: "nvidia/llama-3.1-nemotron-70b-instruct", baseURL: "https://integrate.api.nvidia.com/v1/chat/completions", params: {} }
     ];
@@ -219,7 +219,7 @@ Rule: Base your answer on the provided context. Keep all language consistent wit
     }
 
     return NextResponse.json({
-      answer: "I'm having trouble connecting to my brain right now. Please check your API key or try again in a moment.",
+      answer: "I'm having trouble connecting to my brain right now. Please check your API key or try again in a moment. Debug Error: " + lastError,
       error: lastError,
       sources,
     });

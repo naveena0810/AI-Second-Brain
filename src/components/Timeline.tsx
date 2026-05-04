@@ -7,6 +7,7 @@ import { Clock, FileText, StickyNote, MessageSquare, CalendarDays } from "lucide
 import TimelineItem from "./TimelineItem";
 import TimelineFilters from "./TimelineFilters";
 import TimelineSummary from "./TimelineSummary";
+import ActivityHeatmap from "./ActivityHeatmap";
 import EmptyState from "./EmptyState";
 
 interface Props { userId: string; }
@@ -93,45 +94,9 @@ export default function Timeline({ userId }: Props) {
         </div>
       )}
 
-      {/* Heatmap Section */}
+      {/* Activity Heatmap */}
       {allEvents.length > 0 && (
-        <div className="rounded-2xl p-6" style={{ background: "var(--bg-secondary)", border: "1px solid var(--border)" }}>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>Activity Intensity</h3>
-            <span className="text-[10px] uppercase tracking-wider font-bold" style={{ color: "var(--text-secondary)" }}>Last 30 Days</span>
-          </div>
-          <div className="flex flex-wrap gap-1.5 justify-center sm:justify-start">
-            {Array.from({ length: 30 }).map((_, i) => {
-              const d = new Date();
-              d.setDate(d.getDate() - (29 - i));
-              const count = allEvents.filter(e => new Date(e.date).toDateString() === d.toDateString()).length;
-              const intensity = count === 0 ? 0.05 : count < 3 ? 0.3 : count < 6 ? 0.6 : 1;
-              return (
-                  <div
-                  key={i}
-                  className="w-4 h-4 rounded-[4px] transition-all hover:scale-125 cursor-help ring-1 ring-inset"
-                  title={`${d.toDateString()}: ${count} events`}
-                  style={{ 
-                    background: "var(--accent-primary)",
-                    opacity: intensity === 0.05 ? 0.05 : intensity,
-                    boxShadow: intensity === 0.05 ? "inset 0 0 0 1px var(--border)" : "none"
-                  }}
-                />
-              );
-            })}
-          </div>
-          <div className="mt-3 flex items-center justify-between text-[10px]" style={{ color: "var(--text-secondary)" }}>
-            <span>30 days ago</span>
-            <div className="flex items-center gap-1">
-              <span>Less</span>
-              <div className="flex gap-0.5">
-                {[0.05, 0.3, 0.6, 1].map(v => <div key={v} className="w-2 h-2 rounded-[2px]" style={{ background: "var(--accent-primary)", opacity: v }} />)}
-              </div>
-              <span>More</span>
-            </div>
-            <span>Today</span>
-          </div>
-        </div>
+        <ActivityHeatmap events={allEvents} />
       )}
 
       {/* Filters */}

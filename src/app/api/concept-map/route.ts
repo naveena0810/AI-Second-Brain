@@ -37,9 +37,9 @@ ${text}
 Generate a concept map with nodes and relationships.`;
 
     const models = [
-      { name: "moonshotai/kimi-k2.5", url: "https://integrate.api.nvidia.com/v1/chat/completions" },
-      { name: "meta/llama-3.1-405b-instruct", url: "https://integrate.api.nvidia.com/v1/chat/completions" },
-      { name: "nvidia/llama-3.1-nemotron-70b-instruct", url: "https://integrate.api.nvidia.com/v1/chat/completions" }
+      { id: "meta/llama-3.1-8b-instruct", baseURL: "https://integrate.api.nvidia.com/v1/chat/completions", params: {} },
+      { id: "meta/llama-3.1-405b-instruct", baseURL: "https://integrate.api.nvidia.com/v1/chat/completions", params: {} },
+      { id: "nvidia/llama-3.1-nemotron-70b-instruct", baseURL: "https://integrate.api.nvidia.com/v1/chat/completions", params: {} }
     ];
 
     let finalGraph: any = null;

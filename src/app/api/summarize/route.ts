@@ -40,9 +40,9 @@ ${text.slice(0, 10000)} // Basic limit for simple implementation`;
 
     // Call AI API with Fallback mechanism
     const models = [
-      { id: "moonshotai/kimi-k2.5", params: { chat_template_kwargs: { thinking: false } } },
-      { id: "meta/llama-3.1-405b-instruct", params: {} },
-      { id: "nvidia/llama-3.1-nemotron-70b-instruct", params: {} }
+      { id: "meta/llama-3.1-8b-instruct", baseURL: "https://integrate.api.nvidia.com/v1/chat/completions", params: {} },
+      { id: "meta/llama-3.1-405b-instruct", baseURL: "https://integrate.api.nvidia.com/v1/chat/completions", params: {} },
+      { id: "nvidia/llama-3.1-nemotron-70b-instruct", baseURL: "https://integrate.api.nvidia.com/v1/chat/completions", params: {} }
     ];
 
     let lastError = "";

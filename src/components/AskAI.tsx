@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { db } from "@/lib/instant";
 import { id } from "@instantdb/react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,6 +14,7 @@ import ReactMarkdown from "react-markdown";
 import PerspectiveSelector, { PERSPECTIVES } from "./PerspectiveSelector";
 import ExplainInput from "./ExplainInput";
 import EvaluationResult, { EvaluationData } from "./EvaluationResult";
+import ChallengePrompt from "./ChallengePrompt";
 
 interface Source {
   id: string;
@@ -351,6 +352,21 @@ export default function AskAI({ userId }: Props) {
   // Bonus: Auto-suggest pinning
   const mostActiveQuery = history.find(h => !h.isPinned);
   const showPinSuggestion = mostActiveQuery && history.length > 5 && !pinnedChats.length;
+
+  // Challenge Mode: gather recent topics from history for challenges
+  const recentTopics = useMemo(() => {
+    return history
+      .sort((a: any, b: any) => (b.createdAt || 0) - (a.createdAt || 0))
+      .slice(0, 30)
+      .map((q: any) => q.question)
+      .filter((q: string) => q && q.length > 5);
+  }, [history]);
+
+  const handleChallengeAccept = (topic: string) => {
+    setIsExplainMode(true);
+    // Scroll to bottom so user sees the Explain input
+    setTimeout(() => endRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
+  };
 
   return (
     <div className="flex flex-col gap-0 h-full flex-1 overflow-hidden">
@@ -798,6 +814,14 @@ export default function AskAI({ userId }: Props) {
           </div>
         </div>
       </div>
+
+      {/* Challenge Mode Popup */}
+      <ChallengePrompt
+        userId={userId}
+        recentTopics={recentTopics}
+        onAccept={handleChallengeAccept}
+        isExplainMode={isExplainMode}
+      />
     </div>
   );
 }

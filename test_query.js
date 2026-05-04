@@ -37,7 +37,7 @@ Rule: Base your answer on the provided context. Keep all language consistent wit
       'Accept': 'application/json'
     },
     body: JSON.stringify({
-      model: 'moonshotai/kimi-k2.5',
+      model: 'meta/llama-3.1-8b-instruct',
       messages: [
         { role: 'system', content: systemPrompt },
         { role: 'user', content: 'What is ML?' }
@@ -46,5 +46,5 @@ Rule: Base your answer on the provided context. Keep all language consistent wit
   });
   console.log('Status:', res.status);
   const text = await res.text();
-  console.log('Body:', text);
+  console.log('Body length:', text.length);
 })();

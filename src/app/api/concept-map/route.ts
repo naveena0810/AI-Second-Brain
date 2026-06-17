@@ -47,19 +47,19 @@ Generate a concept map with nodes and relationships.`;
 
     for (const model of models) {
       try {
-        console.log(`Concept Map: Trying model ${model.name}...`);
+        console.log(`Concept Map: Trying model ${model.id}...`);
         
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 60000); // 1 minute timeout
 
-        const response = await fetch(model.url, {
+        const response = await fetch(model.baseURL, {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${KIMI_API_KEY}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: model.name,
+            model: model.id,
             messages: [
               { role: "system", content: systemPrompt },
               { role: "user", content: userPrompt }
@@ -76,7 +76,7 @@ Generate a concept map with nodes and relationships.`;
 
         if (!response.ok) {
           const errorText = await response.text();
-          throw new Error(`API Error (${model.name}): ${response.status} - ${errorText}`);
+          throw new Error(`API Error (${model.id}): ${response.status} - ${errorText}`);
         }
 
         const data = await response.json();
@@ -96,14 +96,14 @@ Generate a concept map with nodes and relationships.`;
              throw new Error("Invalid JSON structure returned");
           }
           
-          console.log(`Concept Map: Success with ${model.name}`);
+          console.log(`Concept Map: Success with ${model.id}`);
           break;
         } else {
-          throw new Error(`Empty response from ${model.name}`);
+          throw new Error(`Empty response from ${model.id}`);
         }
       } catch (err: any) {
         lastError = err.message;
-        console.warn(`Concept Map: Model ${model.name} failed:`, lastError);
+        console.warn(`Concept Map: Model ${model.id} failed:`, lastError);
       }
     }
 

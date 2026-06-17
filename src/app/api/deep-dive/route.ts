@@ -38,19 +38,19 @@ Please expand this into a Deep Dive Mode explanation.`;
 
     for (const model of models) {
       try {
-        console.log(`Deep Dive: Trying model ${model.name}...`);
+        console.log(`Deep Dive: Trying model ${model.id}...`);
         
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 60000); // 1 minute timeout for deep dive
 
-        const response = await fetch(model.url, {
+        const response = await fetch(model.baseURL, {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${KIMI_API_KEY}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: model.name,
+            model: model.id,
             messages: [
               { role: "system", content: systemPrompt },
               { role: "user", content: userPrompt }
@@ -67,21 +67,21 @@ Please expand this into a Deep Dive Mode explanation.`;
 
         if (!response.ok) {
           const errorText = await response.text();
-          throw new Error(`API Error (${model.name}): ${response.status} - ${errorText}`);
+          throw new Error(`API Error (${model.id}): ${response.status} - ${errorText}`);
         }
 
         const data = await response.json();
         
         if (data.choices && data.choices[0]?.message?.content) {
           finalDeepDive = data.choices[0].message.content;
-          console.log(`Deep Dive: Success with ${model.name}`);
+          console.log(`Deep Dive: Success with ${model.id}`);
           break;
         } else {
-          throw new Error(`Empty response from ${model.name}`);
+          throw new Error(`Empty response from ${model.id}`);
         }
       } catch (err: any) {
         lastError = err.message;
-        console.warn(`Deep Dive: Model ${model.name} failed:`, lastError);
+        console.warn(`Deep Dive: Model ${model.id} failed:`, lastError);
         // Continue to next model
       }
     }
